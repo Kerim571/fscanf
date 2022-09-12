@@ -10,35 +10,35 @@
 
 char const* const VERSIONSNR = "0.1.2";
 
-int const DB_SIZE = 40;
+int const DB_SIZE = 20;
 
 struct vorfahren
 {
-	char vorname[20];
-	char nachname[20];
+    char vorname[20];
+    char nachname[20];
 };
 
 struct gdatum
 {
-	int tag;
-	int monat;
-	int jahr;
+    int tag;
+    int monat;
+    int jahr;
 };
 
 struct tdatum
 {
-	int tag;
-	int monat;
-	int jahr;
+    int tag;
+    int monat;
+    int jahr;
 };
 
 struct person
 {
-	char vorname[20];
-	char nachname[20];
-	struct vorfahren vorfahre;
-	struct gdatum geburtsdatum;
-	struct tdatum todesdatum;
+    char vorname[20];
+    char nachname[20];
+    struct vorfahren vorfahre;
+    struct gdatum geburtsdatum;
+    struct tdatum todesdatum;
 };
 typedef struct person person_t;
 
@@ -57,29 +57,31 @@ void readcsv(char const* const datei)
     }
     person_t stammbaum[DB_SIZE];
     while(fscanf(filepointer,
-                 "%[^,],%[^,],%[^,],%[^,],%d,%d,%d,%d,%d,%d,%s",
+                 "%[^,],%[^,],%[^,],%[^,],%d,%d,%d,%d,%d,%d",
                  stammbaum[zaehler].vorname,
                  stammbaum[zaehler].nachname,
-		 stammbaum[zaehler].vorfahre.vorname,
-		 stammbaum[zaehler].vorfahre.nachname,
-		 &stammbaum[zaehler].geburtsdatum.tag,
-		 &stammbaum[zaehler].geburtsdatum.monat,
-		 &stammbaum[zaehler].geburtsdatum.jahr,
-		 &stammbaum[zaehler].todesdatum.tag,
-		 &stammbaum[zaehler].todesdatum.monat,
-		 &stammbaum[zaehler].todesdatum.jahr)
-                 
-          != EOF)
+                 stammbaum[zaehler].vorfahre.vorname,
+                 stammbaum[zaehler].vorfahre.nachname,
+                 &stammbaum[zaehler].geburtsdatum.tag,
+                 &stammbaum[zaehler].geburtsdatum.monat,
+                 &stammbaum[zaehler].geburtsdatum.jahr,
+                 &stammbaum[zaehler].todesdatum.tag,
+                 &stammbaum[zaehler].todesdatum.monat,
+                 &stammbaum[zaehler].todesdatum.jahr)
+
+            != EOF)
     {
-        printf("\nName: %s, %s, \n Vorfahre: %s, %s \n Geburtsdatum: %d.%d.%d \n Todesdatum: %d.%d.%d",
-     		  stammbaum[zaehler].vorname,
-		  stammbaum[zaehler].nachname,
-		  stammbaum[zaehler].vorfahre.vorname,
-		  stammbaum[zaehler].vorfahre.nachname,
-		  &stammbaum[zaehler].geburtsdatum.tag,
-		  &stammbaum[zaehler].geburtsdatum.monat,										  &stammbaum[zaehler].geburtsdatum.jahr,								                  &stammbaum[zaehler].todesdatum.tag,
-		  &stammbaum[zaehler].todesdatum.monat,
-		  &stammbaum[zaehler].todesdatum.jahr);
+        printf("Name: %s, %s, \n Vorfahre: %s, %s \n Geburtsdatum: %d.%d.%d \n Todesdatum: %d.%d.%d \n",
+		stammbaum[zaehler].vorname,
+		stammbaum[zaehler].nachname,
+		stammbaum[zaehler].vorfahre.vorname,
+		stammbaum[zaehler].vorfahre.nachname,
+		stammbaum[zaehler].geburtsdatum.tag,
+		stammbaum[zaehler].geburtsdatum.monat,
+		stammbaum[zaehler].geburtsdatum.jahr,
+		stammbaum[zaehler].todesdatum.tag,
+		stammbaum[zaehler].todesdatum.monat,
+		stammbaum[zaehler].todesdatum.jahr);
         zaehler++;
         if(zaehler == DB_SIZE)
         {
